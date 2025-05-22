@@ -1,0 +1,26 @@
+<!-- sendCourt.wxml -->
+<view class="container">
+  <!-- 图例 -->
+  <view class="legend">
+    <view class="legend-item" style="background-color: #D4EDDA;"></view>
+    <text class="legend-text">已同意</text>
+    <view class="legend-item" style="background-color: #F8D7DA;"></view>
+    <text class="legend-text">已拒绝</text>
+    <view class="legend-item" style="background-color: #FFF3CD;"></view>
+    <text class="legend-text">未响应</text>
+  </view>
+  <text class="section-title">换场申请</text>
+  <block wx:for="{{exCourtRequests}}" wx:key="exchange_uploader_court_id">
+    <view class="item" bindtap="toggleOptions" data-exchange_uploader_court_id="{{item.exchange_uploader_court_id}}" data-exchange_responser_court_id="{{item.exchange_responser_court_id}}" style="background-color: {{item.statusColor}}">
+      <view class="itemname">
+        <image src="/images/cube.png" class="icon" />
+        <text>我的场地ID: {{item.exchange_uploader_court_id}} \n 对方的场地ID: {{item.exchange_responser_court_id}} \n 请求者: {{item.exchange_responser_id}} {{item.Student_name}} </text>
+      </view>
+      <view class="button-container" wx:if="{{item.showOptions}}">
+        <button bindtap="acceptRequest"data-exchange_uploader_court_id="{{item.exchange_uploader_court_id}}" data-exchange_responser_court_id="{{item.exchange_responser_court_id}}" data-exchange_responser_id ="{{item.exchange_responser_id}}" >同意</button>
+        <button bindtap="rejectRequest"data-exchange_uploader_court_id="{{item.exchange_uploader_court_id}}" data-exchange_responser_court_id="{{item.exchange_responser_court_id}}" data-exchange_responser_id ="{{item.exchange_responser_id}}" >拒绝</button>
+        <button bindtap="goToChat"data-exchange_uploader_court_id="{{item.exchange_uploader_court_id}}" data-exchange_responser_court_id="{{item.exchange_responser_court_id}}" data-exchange_responser_id ="{{item.exchange_responser_id}}">去聊天</button>
+      </view>
+    </view>
+  </block>
+</view>

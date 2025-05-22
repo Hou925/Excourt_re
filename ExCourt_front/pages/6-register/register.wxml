@@ -1,0 +1,23 @@
+<!-- pages/register/register.wxml -->
+<view class="container">
+  <view class="logo">
+    <image src="/images/logo.png" 
+    class="logo-image"></image>
+  </view>
+  <view class="input-group">
+    <input class="input-control" type="text" placeholder="请输入学号" bindinput="bindStudentIdInput" />
+  </view>
+  <view class="input-group">
+    <input class="input-control" type="text" placeholder="请输入姓名" bindinput="bindStudentNameInput" />
+  </view>
+  <view class="input-group">
+    <input class="input-control" type="text" placeholder="请输入昵称" bindinput="bindNickNameInput" />
+  </view>
+  <view class="input-group">
+    <input class="input-control" type="text" placeholder="请输入手机号" bindinput="bindStudentPhoneInput" />
+  </view>
+  <view class="input-group">
+    <input class="input-control" type="password" placeholder="请输入密码" bindinput="bindPasswordInput" />
+  </view>
+  <button class="btn" bindtap="bindRegister">注册</button>
+</view>

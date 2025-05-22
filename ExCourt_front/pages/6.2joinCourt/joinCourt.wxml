@@ -1,0 +1,26 @@
+<!-- sendCourt.wxml -->
+<view class="container">
+  <!-- 图例 -->
+  <view class="legend">
+    <view class="legend-item" style="background-color: #D4EDDA;"></view>
+    <text class="legend-text">已同意</text>
+    <view class="legend-item" style="background-color: #F8D7DA;"></view>
+    <text class="legend-text">已拒绝</text>
+    <view class="legend-item" style="background-color: #FFF3CD;"></view>
+    <text class="legend-text">未响应</text>
+  </view>
+  <text class="section-title">拼场申请</text>
+  <block wx:for="{{joinCourtRequests}}" wx:key="Teamup_court_id">
+    <view class="item" bindtap="toggleOptions" data-id="{{item.Teamup_court_id}}" data-responser="{{item.Teamup_requester_id}}" style="background-color: {{item.statusColor}}">
+      <view class="itemname">
+        <image src="/images/cube.png" class="icon" />
+        <text>场地ID: {{item.Teamup_court_id}}\n申请者: {{item.Teamup_requester_id}}</text>
+      </view>
+      <view class="button-container" wx:if="{{item.showOptions}}">
+        <button bindtap="acceptRequest" data-responser="{{item.Teamup_requester_id}}" data-id="{{item.Teamup_court_id}}"  >同意</button>
+        <button bindtap="rejectRequest" data-id="{{item.Teamup_court_id}}" data-responser="{{item.Teamup_requester_id}}" >拒绝</button>
+        <button bindtap="goToChat" data-id="{{item.Teamup_court_id}}" data-responser="{{item.Teamup_requester_id}}">去聊天</button>
+      </view>
+    </view>
+  </block>
+</view>

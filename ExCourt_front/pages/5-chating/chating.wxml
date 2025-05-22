@@ -1,0 +1,24 @@
+<view class="container">
+  <view class="search-and-create">
+    <!-- 搜索框 -->
+    <mp-searchbar 
+        class="search-bar" 
+        placeholder="搜索姓名" 
+        bindinput="onSearchInput" />
+    <!-- 创建聊天按钮 -->
+    <view class="create-chat-btn" bindtap="createChat">
+        <text class="plus-icon">+</text>
+    </view>
+  </view>
+
+  <!-- 好友列表 -->
+  <scroll-view class="friend-list" scroll-y="true">
+    <block wx:for="{{filtered_contacts}}" wx:key="student_id">
+      <view class="friend-item" data-index="{{index}}" data-studentid="{{item.student_id}}" bindtap="startChat">
+        <image class="friend-avatar" src="{{item.profileurl}}" />
+        <text class="friend-name">{{item.name}}</text>
+      </view>
+    </block>
+  </scroll-view>
+</view>
+

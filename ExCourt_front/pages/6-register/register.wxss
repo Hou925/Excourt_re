@@ -1,0 +1,49 @@
+/* pages/register/register.wxss */
+.container {
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%; /* 宽度填充整个屏幕 */
+    
+    background-color: rgb(236, 243, 209); /* 输入框背景色 */
+  }
+
+  .logo {
+    margin-bottom: 50px;
+  }
+  
+  .logo-image {
+    width: 200px; /* 宽度放大两倍 */
+    height: 200*1.28px; /* 高度放大两倍 */
+  }
+
+  
+  .input-group {
+    width: 90%; /* 调整宽度为90%，留出一些边距 */
+    margin-bottom: 20px;
+  }
+  
+  .input-control {
+    height: 40px;
+    line-height: 40px;
+    border: 1px solid #ccc;
+    padding: 0 10px;
+    border-radius: 5px;
+    background-color: #fff;
+    color: #333;
+    width: 100%; /* 输入框宽度填满容器 */
+    box-sizing: border-box; /* 包括padding和border在内的宽度计算 */
+  }
+  
+  .btn {
+    width: 80%; /* 调整按钮宽度为90%，留出一些边距 */
+    height: 50px;
+    line-height: 40px;
+    background-color: rgb(65, 212, 134); /* 主题色：绿色 */
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 20px;
+  }

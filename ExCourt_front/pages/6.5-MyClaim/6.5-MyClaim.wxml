@@ -1,0 +1,48 @@
+<view class="container">
+  <view class="record-list">
+    <block wx:for="{{historyRecords}}" wx:key="index">
+      <view class="record-item">
+        <view class="frame_1000000809">
+          <view class="flexcontainer">
+            <view class="frame_22">
+              <view class="mask_group">
+                <view class="rectangle_565">
+                  
+                  <image class="image_14" src="{{item.courtid_split[0] === 'JiaDing' ? '/images/景点.png' : '/images/城市.png'}}" />
+                </view>
+              </view>
+              <view class="frame_17">
+                <!-- 大标题：校区 + 场地 -->
+                <text class="text">{{item.courtid_split[0]}}场地{{item.courtid_split[5]}}</text>
+                <!-- 中标题：起始时间 - 结束时间 -->
+                <text class="text_1">{{item.courtid_split[1]}}年{{item.courtid_split[2]}}月{{item.courtid_split[3]}}：{{item.courtid_split[4] === 0 ? '9:00 - 10:00' : 
+                  (item.courtid_split[4] === 1 ? '10:00 - 11:00' : 
+                  (item.courtid_split[4] === 2 ? '11:00 - 12:00' : 
+                  (item.courtid_split[4] === 3 ? '12:00 - 13:00' : 
+                  (item.courtid_split[4] === 4 ? '13:00 - 14:00' : 
+                  (item.courtid_split[4] === 5 ? '14:00 - 15:00' : 
+                  (item.courtid_split[4] === 6 ? '15:00 - 16:00' : 
+                  (item.courtid_split[4] === 7 ? '16:00 - 17:00' : 
+                  (item.courtid_split[4] === 8 ? '17:00 - 18:00' : 
+                  (item.courtid_split[4] === 9 ? '18:00 - 19:00' : 
+                  (item.courtid_split[4] === 10 ? '19:00 - 20:00' : 
+                  (item.courtid_split[4] === 11 ? '20:00 - 21:00' : '21:00 - 22:00')))))))))))}}</text>
+                <!-- 小标题及其他信息 -->
+                <view class="text_2">
+                  {{item.source === 'Exchangecourt' ? '换场' : (item.source === 'Offercourt' ? '送场' : (item.source === 'Teamup' ? '组队' : '未知'))}}
+                </view>
+              </view>
+            </view>
+            <!-- 状态 -->
+            <text class="text_3">
+                {{item.status === 'not_responsed' ? '未响应' : 
+                (item.status === 'responsed' ? '已响应' : 
+                (item.status === 'exchanged' ? '已交换' : 
+                (item.status === 'offered' ? '已送出' : '未知状态')))}}
+            </text>
+          </view>
+        </view>
+      </view>
+    </block>
+  </view>
+</view>

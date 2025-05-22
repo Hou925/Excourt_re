@@ -1,0 +1,219 @@
+/* 全局样式 */
+.container {
+  display: flex; /* 开启Flexbox布局 */
+  flex-direction: column; /* 子项目按列排列 */
+  align-items: center; /* 水平居中 */
+  justify-content: center; /* 垂直居中 */
+  padding: 30px;
+  background-color: #f5f5f5;
+  min-height: 100vh; /* 最小高度为视口高度，确保占满整个屏幕 */
+  width: 100vw; /* 宽度为视口宽度 */
+}
+
+.navbar-tabs {
+  width: 90%;
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 10px;
+  border: 1px solid #e6e6e6;
+  padding: 10px 0;
+}
+
+.graydivide {
+  height: 2px;
+  margin-top: 10px;
+  background-color: #297533; /* 灰色背景 */
+  width: 90%; /* 确保横条横跨父容器的宽度 */
+}
+
+.tab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.tab-icon {
+  width: 24px;
+  height: 24px;
+  margin-bottom: 5px;
+}
+
+.section-title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #333;
+}
+.section {
+  margin-top: 10px;
+}
+
+/* 每个项目的样式 */
+.item {
+  font-size: 12px;
+  width : 90%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 2px;
+  cursor: pointer;
+  border: 1px solid #e6e6e6;
+}
+
+.itemname {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.icon {
+  width: 15px;
+  height: 15px;
+  margin-right: 10px;
+}
+
+button {
+  margin-top: 10px;
+  padding: 8px 16px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+button:disabled {
+  background-color: #ddd;
+}
+
+button + button {
+  margin-left: 10px;
+}
+
+
+.frame_1 {
+  margin-top: 5%;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  position: relative;
+}
+.rectangle_568 {
+  background-color: #fff;
+  border: 1px solid #d3c7c7;
+  border-radius: 12px;
+  width: 100%;
+  height: 201px;
+  margin-top: 0;
+  margin-left: 0;
+  position: relative;
+}
+.mask_group {
+  flex-direction: row;
+  width: 100%;
+  height: 202px;
+  margin-top: -201px;
+  margin-left: 0;
+  display: flex;
+  position: relative;
+  transform: rotate(0);
+}
+.rectangle_561 {
+  border-radius: 12px;
+  flex-direction: column;
+  align-items: flex-start;
+  width:100%;
+  height: 202px;
+  margin-top: 0;
+  margin-left: 0;
+  display: flex;
+  position: relative;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(#d9d9d9, #d9d9d9);
+}
+.sendlogo {
+  object-fit: cover;
+  flex-shrink: 0;
+  width: 90%;
+  height: 220px;
+  margin-top: -3px;
+  margin-left: -18px;
+  position: relative;
+  transform: rotate(0);
+}
+.rectangle_1 {
+  backdrop-filter: blur(20px);
+  isolation: isolate;
+  background-color: rgba(82, 36, 120, 0.678);
+  border-radius: 0 12px 12px 0;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 15%;
+  height: 202px;
+  margin-top: 0;
+  margin-left: -15%;
+  display: flex;
+  position: relative;
+  transform: rotate(0);
+}
+.rectangle_2 {
+  backdrop-filter: blur(20px);
+  isolation: isolate;
+  background-color: rgba(120, 91, 36, 0.795);
+  border-radius: 0 12px 12px 0;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 15%;
+  height: 202px;
+  margin-top: 0;
+  margin-left: -15%;
+  display: flex;
+  position: relative;
+  transform: rotate(0);
+}
+.rectangle_3 {
+  backdrop-filter: blur(20px);
+  isolation: isolate;
+  background-color: rgba(120, 36, 36, 0.815);
+  border-radius: 0 12px 12px 0;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 15%;
+  height: 202px;
+  margin-top: 0;
+  margin-left: -15%;
+  display: flex;
+  position: relative;
+  transform: rotate(0);
+}
+.text {
+  color: #fff;
+  white-space: pre;
+  z-index: 1;
+  writing-mode: vertical-rl;
+  height: 36px;
+  margin-top: 40%;
+  margin-bottom: -7.5px;
+  margin-left: 5%;
+  font-family: Kantumruy;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 36px;
+  position: relative;
+}
+.text_1 {
+  writing-mode: vertical-rl;
+  color: #fff;
+  white-space: pre;
+  z-index: 0;
+  margin-top: 0;
+  margin-left: 60%;
+  font-family: Kantumruy;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 21px;
+  position: relative;
+}

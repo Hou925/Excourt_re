@@ -1,0 +1,21 @@
+<view class="container">
+  <view class="header">
+    <input class="search-input" placeholder="请输入球友学号" bindinput="onInput" />
+    <button class="add-btn" bindtap="addFriend">添加球友</button>
+  </view>
+
+  <!-- 好友列表 -->
+  <view class="friend-list">
+    <block wx:for="{{friends}}" wx:key="student_id">
+      <view class="friend-item" bindtap="goToConversation" data-id="{{item.student_id}}" data-name="{{item.nickname}}">
+        <image class="avatar" src="{{item.profile_url}}" mode="aspectFill" />
+        <view class="friend-info">
+          <text class="friend-nickname">{{item.nickname}}</text>
+          <text class="friend-id">学号: {{item.student_id}}</text>
+        </view>
+        <button class="delete-btn" catchtap="deleteFriend" data-id="{{item.student_id}}">删除</button>
+      </view>
+    </block>
+  </view>
+
+</view>

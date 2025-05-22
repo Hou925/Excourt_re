@@ -1,0 +1,17 @@
+<view class="container">
+  <!-- 显示已接受的场次信息 -->
+  <view class="accepted-info">
+    <text class="accepted-text">
+      您已成功申请来自“{{uploader_id}}”的场次：
+      <text class="session-info">日期：{{date}}\n时间：{{timeslot}}\n场地编号：{{courtid}}</text>
+      请等待对方回复
+    </text>
+  </view>
+
+  <view class="friend-info">
+    <text class="friend-text">
+      该场次的用户的学号是：{{uploader_id}}
+    </text>
+    <button class="add-button" bindtap="gotoChat">去联系他</button>
+  </view>
+</view>

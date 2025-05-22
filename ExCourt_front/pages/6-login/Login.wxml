@@ -1,0 +1,18 @@
+<!-- pages/Login/Login.wxml -->
+<view class="container">
+  <view class="logo">
+    <image src="/images/logo.png" 
+    class="logo-image"></image>
+  </view>
+  <view class="input-group">
+    <input class="input-control" type="text" placeholder="请输入用户名" bindinput="bindUsernameInput" />
+  </view>
+  <view class="input-group">
+    <input class="input-control" type="password" placeholder="请输入密码" bindinput="bindPasswordInput" />
+  </view>
+  <button class="btn" bindtap="bindLogin">登录</button>
+
+  <view class="footer">
+  <text class="register-text">没有账号？<text class="register-link" bindtap="goToRegister">注册</text></text>
+  </view>
+</view>

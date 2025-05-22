@@ -1,0 +1,74 @@
+.container {
+  padding: 20rpx;
+}
+
+/* 图例样式 */
+.legend {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.legend-item {
+  width: 30rpx;
+  height: 30rpx;
+  border-radius: 50%;
+  margin-right: 10rpx;
+}
+
+.legend-text {
+  margin-right: 20rpx;
+  font-size: 28rpx;
+  color: #333;
+}
+
+/* 标题样式 */
+.section-title {
+  font-size: 36rpx;
+  font-weight: bold;
+  margin-bottom: 20rpx;
+}
+
+/* 列表项样式 */
+.item {
+  width: 100%; /* 确保横向填满父容器 */
+  box-sizing: border-box; /* 包括内边距和边框在宽度内 */
+  margin-bottom: 20rpx;
+  padding: 20rpx;
+  border-radius: 10rpx;
+  box-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s;
+  display: flex; /* 使用弹性布局 */
+  flex-direction: column; /* 列布局，确保按钮和内容分层 */
+}
+
+/* 列表项内容 */
+.itemname {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* 确保内容均匀分布 */
+  word-break: break-word; /* 防止长内容超出边界 */
+}
+
+.icon {
+  width: 40rpx;
+  height: 40rpx;
+  margin-right: 10rpx;
+}
+
+/* 按钮容器 */
+.button-container {
+  display: flex;
+  justify-content: space-around; /* 按钮均匀分布 */
+  margin-top: 10rpx;
+}
+
+button {
+  flex: 1;
+  margin: 0 5rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  font-size: 28rpx;
+  border-radius: 10rpx;
+  text-align: center;
+}

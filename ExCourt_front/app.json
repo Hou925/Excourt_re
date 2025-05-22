@@ -1,0 +1,63 @@
+{
+    "pages": [
+        "pages/6-login/Login",
+        "pages/index/index",
+        "pages/3-teamUp/teamUp",
+        "pages/1-court-view/court-view",
+        "pages/2-exchange/index",
+        "pages/4-index/indexLost",
+        "pages/3-publishCourt/publishCourt",
+        "pages/6-register/register",
+        "pages/3-handleCourts/handleCourts",
+        "pages/3-applyCourt/applyCourt",
+        "pages/3-applyDetails/applyDetails",
+        "pages/3-evaluateTeam/evaluateTeam",
+        "pages/3-evaluation/evaluation",
+        "pages/4-claim/claim",
+        "pages/4-misclaim/misclaim",
+        "pages/4-publishLost/publishLost",
+        "pages/6-Me/6-Me",
+        "pages/6-PersonInfo/6-PersonInfo",
+        "pages/6-historyRecord/historyRecord",
+        "pages/6-operationRecord/6-operationRecord",
+        "pages/6-buddyManagement/buddyManagement",
+        "pages/5-chating/chating",
+        "pages/5-conversation/conversation",
+        "pages/acceptOffer/acceptOffer",
+        "pages/joinIn/joinIn",
+        "pages/6.1sendCourt/sendCourt",
+        "pages/6.2joinCourt/joinCourt",
+        "pages/6.3changeCourt/changeCourt",
+        "pages/6.4-MyPublish/6.4-MyPublish",
+        "pages/6.5-MyClaim/6.5-MyClaim",
+        "pages/ExCourtTeam/ExCourtTeam"
+    ],
+    "window": {
+        "navigationBarTextStyle": "black",
+        "navigationBarTitleText": "Weixin",
+        "navigationBarBackgroundColor": "#ffffff"
+    },
+    "useExtendedLib": {
+        "weui": true
+    },
+    "tabBar": {
+        "list": [
+            {
+                "pagePath": "pages/index/index",
+                "iconPath": "images/icon_component.png",
+                "selectedIconPath": "images/icon_component_HL.png",
+                "text": "首页"
+            },
+            {
+                "pagePath": "pages/6-Me/6-Me",
+                "iconPath": "images/icon_API.png",
+                "selectedIconPath": "images/icon_API_HL.png",
+                "text": "我"
+            }
+        ]
+    },
+    "style": "v2",
+    "componentFramework": "glass-easel",
+    "sitemapLocation": "sitemap.json",
+    "lazyCodeLoading": "requiredComponents"
+}

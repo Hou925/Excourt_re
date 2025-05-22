@@ -1,0 +1,98 @@
+/* 整体容器 */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start; /* 从顶部开始对齐 */
+  padding: 20rpx;
+  background-color: #f4f5f7;
+  min-height: 100vh; /* 确保页面占满整个屏幕 */
+}
+
+/* 头部搜索框 */
+.header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.search-input {
+  flex: 1;
+  padding: 12rpx;
+  border: 1px solid #d9d9d9;
+  border-radius: 30rpx;
+  background-color: white;
+  font-size: 28rpx;
+  margin-right: 10rpx;
+}
+
+.add-btn {
+  padding: 12rpx 20rpx;
+  background-color: #007aff;
+  color: white;
+  font-size: 28rpx;
+  border-radius: 30rpx;
+  border: none;
+  box-shadow: 0 4rpx 8rpx rgba(0, 0, 0, 0.2);
+}
+
+/* 好友列表容器 */
+.friend-list {
+  margin-top: 20rpx;
+  display: flex;
+  flex-direction: column; /* 垂直排列 */
+  align-items: stretch; /* 拉伸子项宽度 */
+  justify-content: flex-start; /* 从顶部开始排列 */
+}
+
+/* 单个好友项 */
+.friend-item {
+  display: flex;
+  align-items: center;
+  padding: 12rpx;
+  background-color: white;
+  border-radius: 10rpx;
+  margin-bottom: 15rpx;
+  box-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.1);
+}
+
+/* 好友头像 */
+.avatar {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  margin-right: 20rpx;
+  border: 2rpx solid #d9d9d9;
+}
+
+/* 好友信息部分 */
+.friend-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.friend-nickname {
+  font-size: 34rpx; /* 更大的昵称字体 */
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 5rpx;
+}
+
+.friend-id {
+  font-size: 30rpx; /* 更大的学号字体 */
+  color: #666;
+}
+
+/* 删除按钮 */
+.delete-btn {
+  background-color: #ff4d4f;
+  color: white;
+  padding: 8rpx 16rpx; /* 减小按钮内边距 */
+  border-radius: 15rpx; /* 更圆润的边角 */
+  font-size: 24rpx; /* 更小的字体 */
+  box-shadow: 0 2rpx 4rpx rgba(255, 77, 79, 0.3);
+  border: none;
+  height: auto;
+  line-height: normal;
+}

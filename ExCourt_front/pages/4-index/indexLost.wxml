@@ -1,0 +1,47 @@
+<view class="container">  
+  <!-- 顶部导航栏 -->
+  <view class="navbar">
+    <button bindtap="navigateToPublish">发布</button>
+  </view>
+
+  <!-- 搜索框 -->
+  <view class="search-bar">
+    <input type="text" placeholder="搜索物品名称" bindinput="onSearchInput" />
+    <button bindtap="onSearch">搜索</button>
+  </view>
+
+  <!-- 失物信息卡片列表 -->
+  <view class="lost-items">
+    <block wx:for="{{lostItems}}" wx:key="id">
+      <view class="item-card" bindtap="toggleOptions" data-id="{{item.id}}">
+        <view class="item-image-container">
+          <image class="item-image" src="{{item.image}}" mode="aspectFill" />
+        </view>
+        <view class="item-info">
+          <view class="item-header">
+            <text>{{item.losttime}}</text>
+          </view>
+          <view class="item-header">
+            <text class="item-name">{{item.name}}</text>
+          </view>
+          <view class="item-description">
+           <text>物品描述:</text>
+           <text>{{item.description}}</text>
+          </view>
+          <view class="item-location">
+            <text>丢失地点:</text>
+            <text>{{item.lostLocation}}</text>
+          </view>
+          <view class="item-contact">
+            <text class="contact-label">联系方式: </text>
+            <text class="contact-info">{{item.contact}}</text>
+          </view>
+        </view>
+        <view class="button-container" wx:if="{{item.showOptions}}">
+          <button class="claim-button" bindtap="claimItem" data-id="{{item.id}}" wx:if="{{!item.claimed}}">认领</button>
+          <button class="appeal-button" bindtap="navigateToAppeal" data-id="{{item.id}}" wx:if="{{item.claimed}}">错领申诉</button>
+        </view>
+      </view>
+    </block>
+  </view>
+</view>

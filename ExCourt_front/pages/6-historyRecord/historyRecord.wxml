@@ -1,0 +1,35 @@
+<view class="container">
+  <view class="record-list">
+    <block wx:for="{{historyRecords}}" wx:key="index">
+      <view class="record-item">
+        <view class="frame_1000000809">
+          <view class="flexcontainer">
+            <view class="frame_22">
+              <view class="mask_group">
+                <view class="rectangle_565">
+                  <!-- 这里假设有一个默认的图片，如果接口中有图片信息，可以替换src -->
+                  
+                  <image class="image_14" src="{{item.campus === '嘉定' ? '/images/景点.png' : '/images/城市.png'}}" />
+                </view>
+              </view>
+              <view class="frame_17">
+                <!-- 大标题：校区 + 场地 -->
+                <text class="text">{{item.campus}}-{{item.courtNumber}}</text>
+                <!-- 中标题：起始时间 - 结束时间 -->
+                <text class="text_1">{{item.startDate}}：{{item.startTime}}-{{item.endTime}}</text>
+                <!-- 小标题及其他信息 -->
+                <view class="text_2">
+                  <text>最多加入人数：{{item.maxParticipants}}</text>
+                </view>
+              </view>
+            </view>
+            <!-- 状态 -->
+            <text class="text_3">{{item.isTeamup ? '已拼场' : '已换场'}}</text>
+          </view>
+          <!-- 删除记录按钮 -->
+          <button class="delete-btn" bindtap="deleteRecord" data-index="{{index}}">删除记录</button>
+        </view>
+      </view>
+    </block>
+  </view>
+</view>

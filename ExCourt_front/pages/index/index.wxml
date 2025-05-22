@@ -1,0 +1,78 @@
+<view class="explore">
+    <view class="heading">
+        <text class="text">Hello 🔥</text>
+        <text class="text_1">{{greeting + student_name + '用户'}}</text>
+    </view>
+    <view class="search">
+        <view class="ic_search" bindtap="executeSearch">
+            <view class="group_21">
+                <view class="ellipse_1" />
+                <image class="vector_1" src="/images/index/ic_search.png" />
+                </view>
+        </view>
+
+        <input class="search_input" type="text" placeholder="Enter search term" bindinput="onInput" />
+  </view>
+
+  <view class="search-results" wx:if="{{searchTerm != ''}}">
+  <block wx:for="{{searchResults}}" wx:key="unique">
+    <view class="search-result" data-path="{{pageNameMap[(item)]}}" bindtap="navFromIndex">
+      {{item}}
+    </view>
+  </block>
+</view>
+
+    <view class="banner">
+        <view class="replace_image">
+            <image class="image_2" src="/images/ad.png" />
+        </view>
+        <view class="overlay">
+            <view class="overlay_text">
+                <view class="see_more">
+                    <text class="text_3">See more</text>
+                    <image class="back" src="/images/index/back.png" />
+                </view>
+            </view>
+            <text class="text_4">广告位招租</text>
+        </view>
+    </view>
+    <!-- 开始使用按钮 -->
+    <view class="challenge">
+        <text class="text_5">开始使用</text>
+        <view class="flexcontainer">
+            <!-- 使用按钮而非图片 -->
+            <button class="challenge_1" data-path="/pages/5-chating/chating" bindtap="navFromIndex">
+                <image class="box_12" src="/images/index/Box 12.png" />
+                <text class="text_6">聊天
+                Chat</text>
+            </button>
+            <button class="challenge_2" data-path="/pages/1-court-view/court-view" bindtap="navFromIndex">
+                <image class="ball_8" src="/images/index/Ball 8.png" />
+                <text class="text_7">场地
+                Court</text>
+            </button>
+            <button class="challenge_3" data-path="/pages/4-index/indexLost" bindtap="navFromIndex">
+                <image class="pyramid_11" src="/images/index/Pyramid 11.png" />
+                <text class="text_8">失物
+                Lost</text>
+            </button>
+        </view>
+    </view>
+
+    <view class="warmup">
+        <text class="text_9">联系我们</text>
+        <view class="div_01" bindtap="navigateToExCourtTeam">
+            <view class="image">
+                <view class="replace_image_1">
+                    <image class="image_68" src="/images/logo.png" />
+                </view>
+            </view>
+            <view class="flexcontainer_2">
+                <text class="text_10">开发团队</text>
+                <text class="text_11">Excourt.com</text>
+            </view>
+        </view>
+        
+    </view>
+
+</view>

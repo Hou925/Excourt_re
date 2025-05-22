@@ -1,0 +1,194 @@
+/* pages/6-Me/6-Me.wxss */
+.container {
+  padding: 0rpx;
+  margin: 20rpx;
+}
+
+.avatar-wrapper {
+  padding: 0;
+  width: 56px !important;
+  border-radius: 50%;
+  margin: 20px 20px !important;
+}
+
+.avatar {
+  display: block;
+  width: 56px;
+  height: 56px;
+}
+
+.user-info-container {
+  display: flex;
+  flex-direction: column; /* 用户信息垂直排列 */
+  justify-content: center;
+  align-items: flex-start;
+  margin-left: 20rpx;
+}
+
+.nickname-section {
+  font-size: 20px; /* 设置昵称最大显示 */
+  font-weight: bold;
+  color: #000000;
+  margin-bottom: 10rpx; /* 与下面内容的间隔 */
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;  /* 确保并排显示 */
+  font-size: 12px;
+  color: #666666;
+}
+
+.info-item {
+  margin-right: 20rpx; /* 信息项间隔 */
+}
+
+.graydivide {
+  height: 2px;
+  margin-top: 30rpx;
+  background-color: 
+  #dbdbdb; /* 灰色背景 */
+  width: 90%; /* 确保横条横跨父容器的宽度 */
+}
+
+
+.partOne {
+  width: 90%;
+  margin-left: 5%;
+  margin-top: 0rpx;
+  background-color: rgb(255, 255, 255);
+  padding: 20rpx;
+  display: flex;
+  align-items: center;  /* 保证头像和信息在同一行 */
+}
+
+.nickname-input {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  margin-left: 10px;
+}
+
+.partThree {
+  height: 400rpx;
+  width: 95%;
+  margin-left: 5%;
+  margin-top: 50rpx;
+  background-color: #ffffff;
+  border: 1rpx solid rgb(176, 176, 176);
+  border-radius: 25rpx;
+}
+
+.partThree .item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100rpx;
+}
+
+.partThree .item .itemname {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 210rpx;
+  margin-left: 20rpx;
+}
+
+.partThree .item .itemname image {
+  justify-content: space-between;
+  width: 40rpx;
+  height: 40rpx;
+}
+
+.partThree .right {
+  margin-right: 20rpx;
+}
+
+.partThree .right image {
+  width: 50rpx;
+  height: 50rpx;
+}
+
+view,
+text,
+image {
+  box-sizing: border-box;
+}
+
+image {
+  width: 100%; /* 使图片宽度适应容器 */
+  height: 100%; /* 使图片高度适应容器 */
+  object-fit: cover; /* 保持图片的宽高比 */
+}
+
+.group_303 {
+  flex-direction: row;
+  width: 100%;
+  height: 100px;
+  display: flex;
+  margin-left: 10px;
+  position: relative;
+}
+
+.rectangle_1217 {
+  background-color: #3fb459;
+  border-radius: 15px;
+  flex-direction: row;
+  margin-left: 2%;
+  align-items: center; /* 使内容垂直居中 */
+  width: 48%;
+  height: 100px;
+  display: flex;
+  position: relative;
+}
+
+.icons8_help_64_1 {
+  margin-left: 13%;
+  width: 25%; /* 减小图片尺寸 */
+  height: 50%; /* 减小图片尺寸 */
+}
+
+.flexcontainer {
+  flex-direction: column;
+  align-items: flex-start;
+  margin-left: 10px; /* 调整边距 */
+  display: flex;
+  position: relative;
+}
+
+.text {
+
+  letter-spacing: 0;
+  color: #fff;
+  white-space: pre;
+  font-family: Quicksand;
+  font-size: 18px; /* 减小字体尺寸 */
+  font-weight: 700;
+  line-height: 24px; /* 调整行高 */
+  display: flex;
+  position: relative;
+  top: auto; /* 移除绝对定位 */
+  bottom: auto; /* 移除绝对定位 */
+  right: 0; /* 移除绝对定位 */
+  left : 10px;
+  transform: none; /* 移除旋转 */
+}
+
+.text_1 {
+  letter-spacing: 0;
+  color: #c9f2ce;
+  white-space: pre;
+  align-items: center;
+  font-family: Quicksand;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 20px;
+  display: flex;
+  position: relative;
+  top: auto; /* 移除绝对定位 */
+  bottom: auto; /* 移除绝对定位 */
+  left : 10px;
+  right: 0; /* 移除绝对定位 */
+  transform: none; /* 移除旋转 */
+}

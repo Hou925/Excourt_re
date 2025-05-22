@@ -1,0 +1,18 @@
+<view class="container">
+  <!-- 标题 -->
+  <text class="title">场地交换请求</text>
+
+  <view class="section">
+    <text class="section-title">选择以下我拥有的场地进行交换</text>
+
+    <!-- 滚动查看发布的场地记录 -->
+    <scroll-view scroll-y="true" class="scroll-view">
+      <block wx:for="{{courtList}}" wx:key="index">
+        <view class="court-item {{item.selected ? 'selected' : ''}}" bindtap="onCourtItemTap" data-index="{{index}}">
+          <text class="court-text">{{item.court_info}}</text> <!-- 显示格式化后的场地信息 -->
+        </view>
+      </block>
+    </scroll-view>
+  </view>
+  <button class="submit-button" bindtap="onSubmitRequest">发布换场请求</button>
+</view>
