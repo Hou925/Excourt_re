@@ -1,0 +1,41 @@
+<view class="container">
+
+  <text class="section-title">审核申请</text>
+  
+  <view class="frame_1" bindtap="goToPage" data-action="joinCourt">
+    <view class="rectangle_568" />
+    <view class="mask_group">
+        <view class="rectangle_561">
+            <image class="sendlogo" src="/images/JoinLogo.png" />
+        </view>
+        <view class="rectangle_1">
+            <text class="text">审核拼场</text>
+            <text class="text_1">Join Court</text>
+        </view>
+    </view>
+  </view>
+  <view class="frame_1" bindtap="goToPage" data-action="sendCourt">
+    <view class="rectangle_568" />
+    <view class="mask_group">
+        <view class="rectangle_561">
+            <image class="sendlogo" src="/images/SendLogo.png" />
+        </view>
+        <view class="rectangle_2">
+            <text class="text">审核送场</text>
+            <text class="text_1">Send Court</text>
+        </view>
+    </view>
+  </view>
+  <view class="frame_1" bindtap="goToPage" data-action="changeCourt">
+    <view class="rectangle_568" />
+    <view class="mask_group">
+        <view class="rectangle_561">
+            <image class="sendlogo" src="/images/ChangeLogo.png" />
+        </view>
+        <view class="rectangle_3">
+            <text class="text">审核换场</text>
+            <text class="text_1">Change Court</text>
+        </view>
+    </view>
+  </view>
+</view>

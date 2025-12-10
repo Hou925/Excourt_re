@@ -1,0 +1,30 @@
+# IDE specific files
+.idea/
+.vscode/
+system/.idea/
+SchoolAPI/.idea/
+ExCourt_front/.idea/
+
+# Database
+*.sqlite3
+*.db
+# Don't ignore schema files
+!system/Excourt.sql
+!SchoolAPI/SchoolAPI.sql
+# But ignore other SQL files
+*.sql
+
+# Local configuration files
+*.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Frontend
+ExCourt_front/node_modules/
+ExCourt_front/project.private.config.json
+
+# Backend
+system/venv
+SchoolAPI/venv

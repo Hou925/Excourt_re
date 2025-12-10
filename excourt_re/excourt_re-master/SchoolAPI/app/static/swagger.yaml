@@ -1,0 +1,151 @@
+openapi: 3.0.0
+info:
+  title: School API
+  version: 1.0.0
+  description: API for managing students and courts
+
+servers:
+  - url: http://localhost:5000
+    description: Development server
+
+paths:
+  /students:
+    get:
+      summary: Get all students
+      description: Retrieve a list of all students
+      responses:
+        '200':
+          description: List of students
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Student'
+    post:
+      summary: Create a new student
+      description: Add a new student to the system
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Student'
+      responses:
+        '201':
+          description: Student created successfully
+        '400':
+          description: Validation error
+        '409':
+          description: Student already exists
+        '500':
+          description: Internal server error
+
+  /students/verify:
+    post:
+      summary: Verify student credentials
+      description: Verify student login credentials
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VerifyStudent'
+      responses:
+        '200':
+          description: Student verified successfully
+        '400':
+          description: Validation error
+        '404':
+          description: Student not found
+        '500':
+          description: Internal server error
+
+  /courts/{court_id}:
+    get:
+      summary: Get court by ID
+      description: Retrieve court information by its ID
+      parameters:
+        - name: court_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Court information
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Court'
+        '404':
+          description: Court not found
+
+components:
+  schemas:
+    Student:
+      type: object
+      required:
+        - Student_id
+        - Student_name
+        - Student_phone
+        - Student_password
+      properties:
+        Student_id:
+          type: string
+          description: Unique identifier for the student
+        Student_name:
+          type: string
+          description: Name of the student
+        Student_phone:
+          type: string
+          description: Phone number of the student
+        Student_password:
+          type: string
+          description: Student's password
+
+    VerifyStudent:
+      type: object
+      required:
+        - Student_id
+        - Student_name
+        - Student_password
+      properties:
+        Student_id:
+          type: string
+          description: Student's ID
+        Student_name:
+          type: string
+          description: Student's name
+        Student_password:
+          type: string
+          description: Student's password
+
+    Court:
+      type: object
+      properties:
+        Court_id:
+          type: string
+          description: Unique identifier for the court
+        Court_campus:
+          type: string
+          description: Campus where the court is located
+        Court_date:
+          type: string
+          format: date
+          description: Date of court reservation
+        Court_time:
+          type: string
+          description: Time of court reservation
+        Court_no:
+          type: string
+          description: Court number
+        Court_state:
+          type: string
+          description: Current state of the court
+        Court_owner:
+          type: string
+          description: Owner of the court reservation
+        Court_qrcodeurl:
+          type: string
+          description: URL of the court's QR code 

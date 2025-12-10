@@ -1,0 +1,118 @@
+/* 容器样式 */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+}
+
+/* 顶部导航栏样式 */
+.navbar {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px;
+}
+
+/* 搜索框样式 */
+.search-bar {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.search-bar input {
+  flex-grow: 1;
+  padding: 8px;
+  margin-right: 10px;
+}
+
+.search-bar button {
+  padding: 8px 16px;
+}
+
+/* 失物信息卡片列表样式 */
+.lost-items {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 100%;
+}
+
+/* 单个卡片样式 */
+.item-card {
+  width: 45%; /* 两栏排列，每个卡片宽度为48% */
+  display: flex;
+  flex-direction: column;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 5px;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.item-image-container {
+  width: 100%;
+  height: 200px; /* 根据需要调整图片高度 */
+  overflow: hidden;
+}
+
+.item-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.item-info {
+  margin-top: 10px;
+}
+
+.item-header{
+  text-align: center;
+  margin-bottom: 8px;
+}
+ .item-description, .item-time, .item-location,.item-tags, .item-contact {
+  margin-bottom: 8px;  /* 每个信息块之间的间距 */
+}
+
+.item-name {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.item-description,
+.item-time,
+.item-location,
+.item-tags,
+.item-contact  {
+  font-size: 16px;
+  color: #666;
+}
+
+/* 按钮容器样式 */
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 10px;
+}
+
+/* 按钮样式 */
+.claim-button, .appeal-button {
+  flex-grow: 1;
+  padding: 10px;
+  margin: 5px 0;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  background-color: #17ad51;
+}
+
+/* 禁用按钮样式 */
+.disabled-button {
+  opacity: 0.5;
+  pointer-events: none;
+  background-color: #ccc;
+}

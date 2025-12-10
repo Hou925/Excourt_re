@@ -1,0 +1,27 @@
+<!-- pages/6-PersonInfo/6-PersonInfo.wxml -->
+<view class="container">
+  <view class="user-avatar">
+    <image class="avatar" src="{{profileurl}}" mode="aspectFill" />
+    <view class="button-container">
+      <button class="change-avatar" bindtap="changeAvatar">修改头像</button>
+    </view>
+  </view>
+
+  <view class="user-info">
+    <input class="input-field" placeholder="用户昵称" value="{{nickname}}" bindinput="onNicknameInput" />
+    <input class="input-field" placeholder="手机号" value="{{phone}}" bindinput="onPhoneInput" />
+    <view class="readonly-field">
+      <text>信誉分：{{credit}}分</text>
+    </view>
+  </view>
+
+  <view class="picker-container">
+    <picker mode="selector" range="{{levels}}" value="{{levelIndex}}" bindchange="onLevelChange">
+      <view class="picker">
+        羽毛球水平：{{levels[levelIndex]}}
+      </view>
+    </picker>
+  </view>
+
+  <button class="save-button" bindtap="saveUserInfo">保存信息</button>
+</view>

@@ -1,0 +1,77 @@
+<view class='container'>
+  <view class="partOne">
+    <view class="user-avatar">
+      <button class="avatar-wrapper" open-type="getUserInfo" bindgetuserinfo="manageUserInfo">
+        <image class="avatar" src="{{profileurl}}" mode="aspectFill"></image>
+      </button>
+    </view>
+
+    <!-- 用户信息 -->
+    <view class="user-info-container">
+      <view class="nickname-section">
+        <text class="nickname">{{nickname}}</text>
+      </view>
+
+      <!-- 昵称下方的信誉分和羽毛球水平并排显示 -->
+      <view class="info-row">
+        <view class="info-item">
+          <text>信誉分：{{credit}}</text>
+        </view>
+        <view class="info-item">
+          <text>水平：{{levels[level]}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="group_303">
+
+    <button class="rectangle_1217" bindtap="navigateToMyClaim">
+
+        <view class="flexcontainer">
+            <text class="text">我的发布</text>
+            <text class="text_1">查看最近的发布记录</text>
+        </view>
+        <image class="icons8_help_64_1" src="/images/publish.png" />
+
+    </button>
+    <button class="rectangle_1217">
+
+        <view class="flexcontainer" bindtap="navigateToMyPublish">
+            <text class="text">我的申请</text>
+            <text class="text_1">查看待审核的申请</text>
+        </view>
+        <image class="icons8_help_64_1" src="/images/claim.png" />
+    </button>
+  </view>
+
+  <!-- 间隔灰横条 -->
+  <view class="graydivide"></view>
+
+  <view class="partThree">
+    <view class="item" bindtap="manageHistory">
+      <view class="itemname">
+        <image src="/images/comment.png" />
+        <text>历史记录</text>
+      </view>
+    </view>
+    <view class="item" bindtap="manageOperation">
+      <view class="itemname">
+        <image src="/images/comment.png" />
+        <text>申请处理</text>
+      </view>
+    </view>
+    <view class="item" bindtap="manageBuddies">
+      <view class="itemname">
+        <image src="/images/comment.png" />
+        <text>球友管理</text>
+      </view>
+    </view>
+    <view class="item" bindtap="logout">
+      <view class="itemname">
+        <image src="/images/exit.png" />
+        <text>退出登录</text>
+      </view>
+    </view>
+  </view>
+</view>

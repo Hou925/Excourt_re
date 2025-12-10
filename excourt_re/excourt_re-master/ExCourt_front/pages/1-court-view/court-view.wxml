@@ -1,0 +1,75 @@
+<!--pages/court-view/court-view.wxml-->
+<view class="container">
+  <image class="overlay-image" src="{{overlayImage}}" />
+  <view class="header">{{placeName}}</view>
+  <scroll-view class="navScroll" scroll-x enable-flex scroll-into-view="t{{curDay}}" scroll-with-animation>
+    <view class="navItem" wx:for="{{daystrings}}" wx:key="index" id="t{{index}}">
+      <view 
+        class="navContent {{index==curDay?'active': ''}}" 
+        bindtap="changeNav" 
+        data-index="{{index}}"
+      >
+        {{index==0?item+'(今天)':item}}
+      </view>
+    </view>
+  </scroll-view>
+
+  <view class="schedule">
+    <!-- labels -->
+    <view class="status-legend">
+  <radio-group bindchange="onStatusChange">
+    <view class="legend-row">
+    <label wx:for="{{statusOptions}}" wx:key="index" class="legend-item" wx:if="{{index % 2 === 0}}">
+      <radio value="{{item}}" checked="{{selectedStatus === item}}" />
+      <view class="legend-text">
+        {{item}}
+        <image src="/images/bdm.svg" class="legend-icon" style="background-color: {{statColor[item]}};" />
+      </view>
+    </label>
+    <label wx:for="{{statusOptions}}" wx:key="index" class="legend-item" wx:if="{{index % 2 === 1}}">
+      <radio value="{{item}}" checked="{{selectedStatus === item}}" />
+      <view class="legend-text">
+        {{item}}
+        <image src="/images/bdm.svg" class="legend-icon" style="background-color: {{statColor[item]}};" />
+      </view>
+    </label>
+  </view>
+  </radio-group>
+</view>
+    <!-- 第一行 -->
+    <view class="courthead">
+      <view class="courtheader">
+        <view>场地</view>
+      </view>
+      <view class="courtlist">
+        <view class="courtname" wx:for="{{courtNames}}" wx:key="index">
+          {{courtNames[index]}}
+        </view>
+      </view>
+    </view>
+    <scroll-view scroll-x="true" scroll-y scroll-top="{{scrollTop}}" class="courtScroll">
+
+      <view class="courtContent">
+        <!-- 左侧时间 -->
+        <view class = "courtTime">
+          <view wx:for="{{hours}}" wx:key="index" class = "left">
+            {{hours[index]}}
+          </view>
+        </view>
+        <view class="court">
+          <view wx:for="{{filteredCourtSlots}}" wx:key="index" class="citem" 
+            style="margin-left:{{(item.courtId)*102}}rpx;margin-top: {{item.timeId*110-8}}rpx;height: 102rpx;"
+            bind:tap="BlockClick" data-status="{{item.status}}" data-courtid="{{item.Court_id}}" data-timeid="{{item.timeId}}" data-datestring="{{item.dateString}}"
+            data-ownername="{{item.ownerName}}" data-schoolname="{{item.schoolName}}" data-courtname="{{item.courtName}}"
+          >
+            <view class="capsule" style="background-color: {{item.status ? statColor[item.status] : '#ffffff'}}; display: flex; justify-content: center; align-items: center;">
+              <image src="/images/bdm.svg" style="width: 60rpx; height: 60rpx; object-fit: contain;" wx:if="{{item.status}}"></image>
+            </view>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+
+
+</view>

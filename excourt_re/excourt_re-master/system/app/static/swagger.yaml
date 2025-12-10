@@ -1,0 +1,2427 @@
+openapi: 3.0.0
+info:
+  title: ExCourt API
+  description: API for court management system
+  version: 1.0.0
+servers:
+  - url: http://localhost:8000
+    description: Local development server
+
+paths:
+  /friend/add:
+    post:
+      summary: Add a friend
+      tags:
+        - Friends
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - my_id
+                - search_id
+              properties:
+                my_id:
+                  type: integer
+                  description: ID of the user adding a friend
+                search_id:
+                  type: integer
+                  description: ID of the user to be added as friend
+      responses:
+        '201':
+          description: Friend successfully added
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  message:
+                    type: string
+                    example: Friend added successfully
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: error
+                  message:
+                    type: string
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: error
+                  message:
+                    type: string
+
+  /friend/delete:
+    post:
+      summary: Delete a friend
+      tags:
+        - Friends
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - my_id
+                - search_id
+              properties:
+                my_id:
+                  type: integer
+                  description: ID of the user deleting a friend
+                search_id:
+                  type: integer
+                  description: ID of the user to be removed from friends
+      responses:
+        '200':
+          description: Friend successfully deleted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  message:
+                    type: string
+                    example: Friend deleted successfully
+        '400':
+          description: Missing required fields
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: error
+                  message:
+                    type: string
+                    example: Missing required parameters
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: error
+                  message:
+                    type: string
+
+  /friend/getall:
+    post:
+      summary: Get list of all friends
+      tags:
+        - Friends
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - student_id
+              properties:
+                student_id:
+                  type: integer
+                  description: Student ID
+      responses:
+        '200':
+          description: Friends list successfully retrieved
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  message:
+                    type: string
+                    example: Friends list retrieved successfully
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        student_id:
+                          type: integer
+                          description: Student ID
+                        name:
+                          type: string
+                          description: Student name
+                        profile_url:
+                          type: string
+                          description: Student avatar URL
+                        nickname:
+                          type: string
+                          description: Student nickname
+        '400':
+          description: Missing student ID
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: error
+                  message:
+                    type: string
+                    example: Missing required parameters
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: error
+                  message:
+                    type: string
+
+  /chat/send:
+    post:
+      summary: Send a text message
+      tags:
+        - Chat
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Sender_id
+                - Receiver_id
+              properties:
+                Sender_id:
+                  type: integer
+                  description: Sender ID
+                Receiver_id:
+                  type: integer
+                  description: Receiver ID
+                Message_sent:
+                  type: string
+                  description: Message text
+                Message_type:
+                  type: string
+                  default: text
+                  description: Message type
+                Pic_url:
+                  type: string
+                  nullable: true
+                  description: Image URL (if exists)
+      responses:
+        '201':
+          description: Message successfully sent
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  status:
+                    type: string
+        '400':
+          description: Missing required fields
+        '500':
+          description: Server error
+
+  /chat/sendphoto:
+    post:
+      summary: Send a photo
+      tags:
+        - Chat
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+                - photo
+                - Sender_id
+                - Receiver_id
+              properties:
+                photo:
+                  type: string
+                  format: binary
+                  description: Photo file
+                Sender_id:
+                  type: integer
+                  description: Sender ID
+                Receiver_id:
+                  type: integer
+                  description: Receiver ID
+      responses:
+        '201':
+          description: Photo successfully sent
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  profileurl:
+                    type: string
+                  message:
+                    type: string
+                  status:
+                    type: string
+        '400':
+          description: Missing required fields
+        '500':
+          description: Server error
+
+  /chat/history:
+    post:
+      summary: Get chat history
+      tags:
+        - Chat
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - user_id
+                - contact_id
+              properties:
+                user_id:
+                  type: integer
+                  description: User ID
+                contact_id:
+                  type: integer
+                  description: Contact ID
+                page:
+                  type: integer
+                  default: 1
+                  description: Page number
+                limit:
+                  type: integer
+                  default: 20
+                  description: Number of messages per page
+      responses:
+        '200':
+          description: Chat history successfully retrieved
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  message:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        Conversation_id:
+                          type: integer
+                        Sender_id:
+                          type: integer
+                        Receiver_id:
+                          type: integer
+                        Message_sent:
+                          type: string
+                        Message_type:
+                          type: string
+                        Pic_url:
+                          type: string
+                          nullable: true
+                        Message_time:
+                          type: string
+                          format: date-time
+                        Is_read:
+                          type: integer
+                        Is_deleted:
+                          type: integer
+        '400':
+          description: Missing required fields
+        '500':
+          description: Server error
+
+  /chat/mark_as_read:
+    post:
+      summary: Mark messages as read
+      tags:
+        - Chat
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - user_id
+                - contact_id
+              properties:
+                user_id:
+                  type: integer
+                  description: User ID
+                contact_id:
+                  type: integer
+                  description: Contact ID
+      responses:
+        '200':
+          description: Messages successfully marked as read
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '400':
+          description: Missing required fields
+        '500':
+          description: Server error
+
+  /chat/unread_count:
+    get:
+      summary: Get unread message count
+      tags:
+        - Chat
+      parameters:
+        - in: query
+          name: student_id
+          required: true
+          schema:
+            type: integer
+          description: Student ID
+      responses:
+        '200':
+          description: Unread message count successfully retrieved
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    Sender_id:
+                      type: integer
+                    unread_count:
+                      type: integer
+        '400':
+          description: Missing student_id
+        '500':
+          description: Server error
+
+  /chat/contacts:
+    post:
+      summary: Get chat contacts with history
+      tags:
+        - Chat
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - student_id
+              properties:
+                student_id:
+                  type: integer
+                  description: Student ID
+      responses:
+        '200':
+          description: Contacts list successfully retrieved
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  message:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        student_id:
+                          type: integer
+                        name:
+                          type: string
+                        nickname:
+                          type: string
+                        profile_url:
+                          type: string
+        '400':
+          description: Missing student_id
+        '500':
+          description: Server error
+
+  /exchangecourt/upload:
+    post:
+      summary: Upload exchange court request
+      tags:
+        - Exchange courts
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Exchange_uploader_id
+                - Exchange_uploaded_court_id
+              properties:
+                Exchange_uploader_id:
+                  type: integer
+                  description: ID of the user uploading the request
+                Exchange_uploaded_court_id:
+                  type: integer
+                  description: ID of the court for exchange
+      responses:
+        '201':
+          description: Exchange request successfully uploaded
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '400':
+          description: Missing required fields
+        '402':
+          description: User has already uploaded a request for this court
+        '500':
+          description: Server error
+
+  /exchangecourt/respond:
+    post:
+      summary: Respond to exchange court request
+      tags:
+        - Exchange courts
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Exchange_responser_id
+                - Exchange_uploader_court_id
+                - Exchange_responser_court_id
+              properties:
+                Exchange_responser_id:
+                  type: integer
+                  description: ID of the user responding to the request
+                Exchange_uploader_court_id:
+                  type: integer
+                  description: ID of the court uploading the request
+                Exchange_responser_court_id:
+                  type: integer
+                  description: ID of the court for exchange from the responder
+      responses:
+        '201':
+          description: Exchange response successfully recorded
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '400':
+          description: Missing required fields
+        '402':
+          description: Duplicate request detected
+        '404':
+          description: No exchange request found for the specified court
+        '500':
+          description: Server error
+
+  /exchangecourt/get_response_records_by_student:
+    post:
+      summary: Get exchange response records for a student
+      tags:
+        - Exchange courts
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - student_id
+              properties:
+                student_id:
+                  type: integer
+                  description: Student ID
+      responses:
+        '200':
+          description: Exchange response records successfully retrieved
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        exchange_record_id:
+                          type: integer
+                        exchange_state:
+                          type: string
+                        exchange_uploader_court_id:
+                          type: integer
+                        exchange_responser_court_id:
+                          type: integer
+                        exchange_uploader_score:
+                          type: integer
+                          nullable: true
+                        exchange_responser_score:
+                          type: integer
+                          nullable: true
+                        exchange_responser_id:
+                          type: integer
+                        responser_info:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                            profileurl:
+                              type: string
+                            nickname:
+                              type: string
+                            credit:
+                              type: integer
+                            level:
+                              type: integer
+                  status:
+                    type: string
+        '400':
+          description: Missing student_id
+        '500':
+          description: Server error
+
+  /exchangecourt/complete_exchange:
+    post:
+      summary: Complete exchange courts
+      tags:
+        - Exchange courts
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Exchange_uploader_court_id
+                - Exchange_responser_court_id
+                - Exchange_uploader_id
+                - Exchange_responser_id
+              properties:
+                Exchange_uploader_court_id:
+                  type: integer
+                  description: ID of the court uploading the request
+                Exchange_responser_court_id:
+                  type: integer
+                  description: ID of the court for exchange from the responder
+                Exchange_uploader_id:
+                  type: integer
+                  description: ID of the user uploading the request
+                Exchange_responser_id:
+                  type: integer
+                  description: ID of the user responding to the request
+      responses:
+        '200':
+          description: Exchange successfully completed
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  message:
+                    type: string
+        '400':
+          description: Missing required fields
+        '404':
+          description: No matching exchange records found
+        '500':
+          description: Server error
+
+  /exchangecourt/refuse:
+    post:
+      summary: Refuse exchange court request
+      tags:
+        - Exchange courts
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Exchange_uploader_court_id
+                - Exchange_responser_court_id
+                - Exchange_uploader_id
+                - Exchange_responser_id
+              properties:
+                Exchange_uploader_court_id:
+                  type: integer
+                  description: ID of the court uploading the request
+                Exchange_responser_court_id:
+                  type: integer
+                  description: ID of the court for exchange from the responder
+                Exchange_uploader_id:
+                  type: integer
+                  description: ID of the user uploading the request
+                Exchange_responser_id:
+                  type: integer
+                  description: ID of the user responding to the request
+      responses:
+        '200':
+          description: Exchange request successfully refused
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  message:
+                    type: string
+        '400':
+          description: Missing required fields
+        '404':
+          description: No matching exchange records found
+        '500':
+          description: Server error
+
+  /lost_and_found/lost/create:
+    post:
+      summary: Create a lost item record
+      tags:
+        - Lost items
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Lost_uploader_id
+                - Lost_item_name
+                - Lost_description
+                - Lost_position
+                - Lost_time
+              properties:
+                Lost_uploader_id:
+                  type: integer
+                  description: ID of the user losing the item
+                Lost_item_name:
+                  type: string
+                  description: Name of the lost item
+                Lost_description:
+                  type: string
+                  description: Description of the lost item
+                Lost_position:
+                  type: string
+                  description: Location where the item was lost
+                Lost_time:
+                  type: string
+                  format: date-time
+                  description: Loss time
+                Lost_contact:
+                  type: string
+                  description: Contact information
+                Lost_item_pic_url:
+                  type: string
+                  description: URL of the lost item photo
+      responses:
+        '201':
+          description: Lost item record successfully created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Lost item record created successfully
+        '400':
+          description: Missing required fields
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Missing required fields
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  error:
+                    type: string
+
+  /lost_and_found/lost/getall:
+    post:
+      summary: Get list of all lost items
+      tags:
+        - Lost items
+      responses:
+        '200':
+          description: Lost items list successfully retrieved
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  lost_items:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        Lost_id:
+                          type: integer
+                          description: Record ID
+                        Lost_uploader_id:
+                          type: integer
+                          description: User ID
+                        Lost_item_name:
+                          type: string
+                          description: Item name
+                        Lost_description:
+                          type: string
+                          description: Description
+                        Lost_position:
+                          type: string
+                          description: Loss location
+                        Lost_time:
+                          type: string
+                          format: date-time
+                          description: Loss time
+                        Lost_contact:
+                          type: string
+                          description: Contact information
+                        Lost_item_pic_url:
+                          type: string
+                          description: Item photo URL
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  error:
+                    type: string
+
+  /lost_and_found/found/create:
+    post:
+      summary: Create a found item record
+      tags:
+        - Lost items
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Found_uploader_id
+                - Found_item_name
+                - Found_description
+                - Found_position
+                - Found_time
+              properties:
+                Found_uploader_id:
+                  type: integer
+                  description: ID of the user finding the item
+                Found_item_name:
+                  type: string
+                  description: Name of the found item
+                Found_description:
+                  type: string
+                  description: Description of the found item
+                Found_position:
+                  type: string
+                  description: Location where the item was found
+                Found_time:
+                  type: string
+                  format: date-time
+                  description: Find time
+                Found_contact:
+                  type: string
+                  description: Contact information
+                Found_item_pic_url:
+                  type: string
+                  description: URL of the found item photo
+      responses:
+        '201':
+          description: Found item record successfully created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Found item record created successfully
+        '400':
+          description: Missing required fields
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Missing required fields
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  error:
+                    type: string
+
+  /lost_and_found/found/getall:
+    get:
+      summary: Get list of all found items
+      tags:
+        - Lost items
+      responses:
+        '200':
+          description: Found items list successfully retrieved
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  found_items:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        Found_id:
+                          type: integer
+                          description: Record ID
+                        Found_uploader_id:
+                          type: integer
+                          description: User ID
+                        Found_item_name:
+                          type: string
+                          description: Item name
+                        Found_description:
+                          type: string
+                          description: Description
+                        Found_position:
+                          type: string
+                          description: Find location
+                        Found_time:
+                          type: string
+                          format: date-time
+                          description: Find time
+                        Found_contact:
+                          type: string
+                          description: Contact information
+                        Found_item_pic_url:
+                          type: string
+                          description: Item photo URL
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  error:
+                    type: string
+
+  /offercourt/upload:
+    post:
+      summary: Create a court offer
+      tags:
+        - Court Offers
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - my_id
+                - court_id
+              properties:
+                my_id:
+                  type: integer
+                  description: ID of the user offering the court
+                court_id:
+                  type: integer
+                  description: ID of the court being offered
+                upload_time:
+                  type: string
+                  format: date-time
+                  description: Offer time (defaults to current time)
+      responses:
+        '201':
+          description: Court offer successfully created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  message:
+                    type: string
+                    example: Court offer published successfully
+                  data:
+                    type: object
+                    properties:
+                      Offer_upload_id:
+                        type: integer
+        '400':
+          description: Missing required parameters
+        '402':
+          description: User has already uploaded a request for this court
+        '500':
+          description: Server error
+
+  /offercourt/record:
+    post:
+      summary: Accept a court offer
+      tags:
+        - Court Offers
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - my_id
+                - court_id
+              properties:
+                my_id:
+                  type: integer
+                  description: ID of the user accepting the offer
+                court_id:
+                  type: integer
+                  description: ID of the court being accepted
+                upload_time:
+                  type: string
+                  format: date-time
+                  description: Accept time (defaults to current time)
+      responses:
+        '201':
+          description: Court offer successfully accepted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  message:
+                    type: string
+                    example: Court offer accepted successfully
+                  data:
+                    type: object
+                    properties:
+                      Accept_record_id:
+                        type: integer
+        '400':
+          description: Missing required parameters
+        '404':
+          description: No pending offer found for this court
+        '409':
+          description: A similar court offer record already exists
+        '500':
+          description: Server error
+
+  /offercourt/accept:
+    post:
+      summary: Confirm court offer acceptance
+      tags:
+        - Court Offers
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - my_id
+                - court_id
+                - recorder_id
+              properties:
+                my_id:
+                  type: integer
+                  description: ID of the user who offered the court
+                court_id:
+                  type: integer
+                  description: ID of the court
+                recorder_id:
+                  type: integer
+                  description: ID of the user accepting the offer
+      responses:
+        '200':
+          description: Court offer successfully confirmed
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  message:
+                    type: string
+                    example: Court offer accepted successfully
+        '400':
+          description: Missing required parameters
+        '404':
+          description: No matching record found
+        '500':
+          description: Server error
+
+  /offercourt/decline:
+    post:
+      summary: Decline a court offer
+      tags:
+        - Court Offers
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - my_id
+                - court_id
+                - recorder_id
+              properties:
+                my_id:
+                  type: integer
+                  description: ID of the user who offered the court
+                court_id:
+                  type: integer
+                  description: ID of the court
+                recorder_id:
+                  type: integer
+                  description: ID of the user accepting the offer
+      responses:
+        '200':
+          description: Court offer successfully declined
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  message:
+                    type: string
+                    example: 送场请求已拒绝
+        '400':
+          description: Missing required parameters
+        '404':
+          description: No matching record found
+        '500':
+          description: Server error
+
+  /offercourt/get_offer_records:
+    post:
+      summary: Get all court offer records for a user
+      tags:
+        - Court Offers
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - my_id
+              properties:
+                my_id:
+                  type: integer
+                  description: ID of the user
+      responses:
+        '200':
+          description: Records successfully retrieved
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  message:
+                    type: string
+                    example: 获取记录成功
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        Offer_record_id:
+                          type: integer
+                        Offer_responser_id:
+                          type: integer
+                        Offer_state:
+                          type: string
+                        Offer_uploader_court_id:
+                          type: integer
+                        Student_name:
+                          type: string
+                        Student_profileurl:
+                          type: string
+                        Student_nickname:
+                          type: string
+                        Student_credit:
+                          type: integer
+                        Student_level:
+                          type: integer
+                        Student_status:
+                          type: string
+        '400':
+          description: Missing required parameters
+        '500':
+          description: Server error
+
+  /offercourt/get_uploader_id:
+    post:
+      summary: Get the ID of the user who offered a court
+      tags:
+        - Court Offers
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - court_id
+              properties:
+                court_id:
+                  type: integer
+                  description: ID of the court
+      responses:
+        '200':
+          description: Uploader ID successfully retrieved
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  data:
+                    type: object
+                    properties:
+                      uploader_id:
+                        type: integer
+        '400':
+          description: Missing court_id
+        '404':
+          description: No pending offer found for this court
+        '500':
+          description: Server error
+
+  /student/register:
+    post:
+      summary: Register a new student
+      tags:
+        - Students
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Student_id
+                - Student_name
+                - Student_nickname
+                - Student_password
+              properties:
+                Student_id:
+                  type: integer
+                  description: Student's ID
+                Student_name:
+                  type: string
+                  description: Student's full name
+                Student_nickname:
+                  type: string
+                  description: Student's nickname
+                Student_phone:
+                  type: string
+                  description: Student's phone number
+                Student_password:
+                  type: string
+                  description: Student's password
+      responses:
+        '201':
+          description: Student successfully registered
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Student registered successfully
+        '400':
+          description: Missing required fields
+        '500':
+          description: Server error
+
+  /student/login:
+    post:
+      summary: Student login
+      tags:
+        - Students
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Student_id
+                - Student_password
+              properties:
+                Student_id:
+                  type: integer
+                  description: Student's ID
+                Student_password:
+                  type: string
+                  description: Student's password
+      responses:
+        '200':
+          description: Login successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Login successful
+                  Student_id:
+                    type: integer
+                  Student_name:
+                    type: string
+        '400':
+          description: Student_id and password are required
+        '401':
+          description: Incorrect password
+        '404':
+          description: Student_id not found
+
+  /student/update:
+    post:
+      summary: Update student information
+      tags:
+        - Students
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - search_id
+                - profileurl
+                - nickname
+                - phone
+                - level
+              properties:
+                search_id:
+                  type: integer
+                  description: Student's ID
+                profileurl:
+                  type: string
+                  description: URL of student's profile picture
+                nickname:
+                  type: string
+                  description: Student's nickname
+                phone:
+                  type: string
+                  description: Student's phone number
+                level:
+                  type: integer
+                  description: Student's level
+      responses:
+        '200':
+          description: Student information successfully updated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  message:
+                    type: string
+                    example: 用户信息已更新
+        '400':
+          description: Missing required parameters
+        '500':
+          description: Server error
+
+  /student/owned-courts:
+    post:
+      summary: Get courts owned by a student
+      tags:
+        - Students
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - student_id
+              properties:
+                student_id:
+                  type: integer
+                  description: Student's ID
+      responses:
+        '200':
+          description: Successfully retrieved owned courts
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  student_id:
+                    type: integer
+                  owned_courts:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        dayId:
+                          type: integer
+                        Court_owner:
+                          type: integer
+                        Court_no:
+                          type: string
+                        Court_time:
+                          type: string
+                        Court_id:
+                          type: integer
+        '400':
+          description: Missing student_id
+        '500':
+          description: Server error
+
+  /student/get_operation_records:
+    get:
+      summary: Get operation records for a student
+      tags:
+        - Students
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - student_id
+              properties:
+                student_id:
+                  type: integer
+                  description: Student's ID
+      responses:
+        '200':
+          description: Successfully retrieved operation records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    operation_record_id:
+                      type: integer
+                    operation_type:
+                      type: string
+                    operation_id:
+                      type: integer
+                    operation_status:
+                      type: integer
+                    operation_time:
+                      type: string
+                      format: date-time
+        '400':
+          description: Missing required fields
+        '500':
+          description: Server error
+
+  /student/find:
+    post:
+      summary: Find student information
+      tags:
+        - Students
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - search_id
+              properties:
+                search_id:
+                  type: integer
+                  description: Student's ID to search for
+      responses:
+        '200':
+          description: Successfully found student
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  message:
+                    type: string
+                    example: 获取用户信息成功
+                  data:
+                    type: array
+                    items:
+                      type: string
+        '400':
+          description: Missing required parameters
+        '404':
+          description: User not found
+        '500':
+          description: Server error
+
+  /student/get_exchangecourt:
+    post:
+      summary: Get available exchange courts
+      tags:
+        - Students
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - my_id
+              properties:
+                my_id:
+                  type: integer
+                  description: Student's ID
+      responses:
+        '200':
+          description: Successfully retrieved court IDs
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  court_ids_list:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        court_id:
+                          type: integer
+        '400':
+          description: Missing my_id
+        '500':
+          description: Server error
+
+  /student/get_teamupcourt:
+    post:
+      summary: Get available teamup courts
+      tags:
+        - Students
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - my_id
+              properties:
+                my_id:
+                  type: integer
+                  description: Student's ID
+      responses:
+        '200':
+          description: Successfully retrieved court IDs
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  court_ids_list:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        court_id:
+                          type: integer
+        '400':
+          description: Missing my_id
+        '500':
+          description: Server error
+
+  /student/get_offercourt:
+    post:
+      summary: Get available offer courts
+      tags:
+        - Students
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - my_id
+              properties:
+                my_id:
+                  type: integer
+                  description: Student's ID
+      responses:
+        '200':
+          description: Successfully retrieved court IDs
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  court_ids_list:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        court_id:
+                          type: integer
+        '400':
+          description: Missing my_id
+        '500':
+          description: Server error
+
+  /student/get_apply:
+    post:
+      summary: Get user's court applications
+      tags:
+        - Students
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - my_id
+              properties:
+                my_id:
+                  type: integer
+                  description: Student's ID
+      responses:
+        '200':
+          description: Successfully retrieved applications
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        court_id:
+                          type: integer
+                        status:
+                          type: string
+                        source:
+                          type: string
+        '400':
+          description: Missing my_id
+        '500':
+          description: Server error
+
+  /student/get_my_request:
+    post:
+      summary: Get user's court requests
+      tags:
+        - Students
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - my_id
+              properties:
+                my_id:
+                  type: integer
+                  description: Student's ID
+      responses:
+        '200':
+          description: Successfully retrieved requests
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        court_id:
+                          type: integer
+                        status:
+                          type: string
+                        source:
+                          type: string
+        '400':
+          description: Missing my_id
+        '500':
+          description: Server error
+
+  /student/delete_apply:
+    post:
+      summary: Delete a court application
+      tags:
+        - Students
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - table_name
+                - court_id
+                - applier_id
+              properties:
+                table_name:
+                  type: string
+                  description: Type of application (Exchangecourt/Offercourt/Teamup)
+                court_id:
+                  type: integer
+                  description: Court ID
+                applier_id:
+                  type: integer
+                  description: Applicant's ID
+      responses:
+        '200':
+          description: Application successfully deleted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  message:
+                    type: string
+                    example: Record deleted successfully
+        '400':
+          description: Missing required fields or invalid table name
+        '404':
+          description: No matching records found
+        '500':
+          description: Server error
+
+  /student/delete_pub:
+    post:
+      summary: Delete a court publication
+      tags:
+        - Students
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - table_name
+                - court_id
+                - puber_id
+              properties:
+                table_name:
+                  type: string
+                  description: Type of publication (Exchangecourt/Offercourt/Teamup)
+                court_id:
+                  type: integer
+                  description: Court ID
+                puber_id:
+                  type: integer
+                  description: Publisher's ID
+      responses:
+        '200':
+          description: Publication successfully deleted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  message:
+                    type: string
+                    example: Record deleted successfully
+        '400':
+          description: Missing required fields or invalid table name
+        '404':
+          description: No matching records found
+        '500':
+          description: Server error
+
+  /student/update_req:
+    post:
+      summary: Update request status
+      tags:
+        - Students
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - table_name
+                - court_id
+                - owner_id
+                - status
+              properties:
+                table_name:
+                  type: string
+                  description: Type of request (Exchangecourt/Offercourt/Teamup)
+                court_id:
+                  type: integer
+                  description: Court ID
+                owner_id:
+                  type: integer
+                  description: Owner's ID
+                status:
+                  type: integer
+                  description: New status (0 or 1)
+      responses:
+        '200':
+          description: Status successfully updated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  message:
+                    type: string
+        '400':
+          description: Missing required fields, invalid table name, or invalid status
+        '404':
+          description: No matching records found
+        '500':
+          description: Server error
+
+  /student/get_available_courts:
+    post:
+      summary: Get available courts for a student
+      tags:
+        - Students
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - my_id
+              properties:
+                my_id:
+                  type: integer
+                  description: Student's ID
+      responses:
+        '200':
+          description: Successfully retrieved available courts
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  available_courts:
+                    type: array
+                    items:
+                      type: integer
+        '400':
+          description: Missing my_id
+        '404':
+          description: No available courts found
+        '500':
+          description: Server error
+
+  /teamup/upload:
+    post:
+      summary: Register a teamup request
+      tags:
+        - Teamup
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Student_id
+                - Court_id
+                - Max_num
+              properties:
+                Student_id:
+                  type: integer
+                  description: ID of the student creating the teamup
+                Court_id:
+                  type: integer
+                  description: ID of the court for teamup
+                Max_num:
+                  type: integer
+                  description: Maximum number of team members
+      responses:
+        '201':
+          description: Teamup successfully registered
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Teamup registered successfully
+        '400':
+          description: Missing required fields
+        '402':
+          description: User has already uploaded a request for this court
+        '500':
+          description: Server error
+
+  /teamup/record:
+    post:
+      summary: Request to join a teamup
+      tags:
+        - Teamup
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Student_id
+                - Court_id
+              properties:
+                Student_id:
+                  type: integer
+                  description: ID of the student requesting to join
+                Court_id:
+                  type: integer
+                  description: ID of the court for teamup
+      responses:
+        '201':
+          description: Teamup request successfully registered
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Teamup request registered successfully
+                  status:
+                    type: string
+                    example: success
+        '400':
+          description: Duplicate request or missing required fields
+        '404':
+          description: Court not found
+        '500':
+          description: Server error
+
+  /teamup/get_records:
+    post:
+      summary: Get teamup records for a student
+      tags:
+        - Teamup
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Student_id
+              properties:
+                Student_id:
+                  type: integer
+                  description: ID of the student
+      responses:
+        '200':
+          description: Successfully retrieved teamup records
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                  status:
+                    type: string
+                    example: success
+        '404':
+          description: No matched records found
+        '500':
+          description: Server error
+
+  /teamup/accept:
+    post:
+      summary: Accept a teamup request
+      tags:
+        - Teamup
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Teamup_court_id
+                - Teamup_requester_id
+              properties:
+                Teamup_court_id:
+                  type: integer
+                  description: ID of the court
+                Teamup_requester_id:
+                  type: integer
+                  description: ID of the student who requested to join
+      responses:
+        '200':
+          description: Teamup request successfully accepted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Teamup request state updated successfully
+                  status:
+                    type: string
+                    example: success
+        '400':
+          description: Missing required fields
+        '404':
+          description: Teamup request not found
+        '500':
+          description: Server error
+
+  /teamup/refuse:
+    post:
+      summary: Refuse a teamup request
+      tags:
+        - Teamup
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Teamup_court_id
+                - Teamup_requester_id
+              properties:
+                Teamup_court_id:
+                  type: integer
+                  description: ID of the court
+                Teamup_requester_id:
+                  type: integer
+                  description: ID of the student who requested to join
+      responses:
+        '200':
+          description: Teamup request successfully refused
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Teamup request state updated successfully
+                  status:
+                    type: string
+                    example: success
+        '400':
+          description: Missing required fields
+        '404':
+          description: Teamup request not found
+        '500':
+          description: Server error
+
+  /teamup/get_uploader_id:
+    post:
+      summary: Get the ID of the student who created the teamup
+      tags:
+        - Teamup
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - court_id
+              properties:
+                court_id:
+                  type: integer
+                  description: ID of the court
+      responses:
+        '200':
+          description: Successfully retrieved uploader ID
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  data:
+                    type: object
+                    properties:
+                      uploader_id:
+                        type: integer
+        '400':
+          description: Missing court_id
+        '404':
+          description: No pending offer found for this court
+        '500':
+          description: Server error
+
+  /upload/profile:
+    post:
+      summary: Upload a profile photo
+      tags:
+        - File Upload
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+                - photo
+                - filename
+              properties:
+                photo:
+                  type: string
+                  format: binary
+                  description: Profile photo file
+                filename:
+                  type: string
+                  description: Name of the file
+      responses:
+        '201':
+          description: Profile photo successfully uploaded
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  profileurl:
+                    type: string
+                    description: Path to the uploaded file
+                  message:
+                    type: string
+        '500':
+          description: Server error
+
+  /upload/lostfind:
+    post:
+      summary: Upload a lost and found item photo
+      tags:
+        - File Upload
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+                - photo
+              properties:
+                photo:
+                  type: string
+                  format: binary
+                  description: Lost and found item photo file
+      responses:
+        '201':
+          description: Lost and found item photo successfully uploaded
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  profilename:
+                    type: string
+                    description: Generated filename for the uploaded photo
+        '500':
+          description: Server error
+
+  /upload/find_profile:
+    post:
+      summary: Find a profile photo by student ID
+      tags:
+        - File Upload
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - student_id
+              properties:
+                student_id:
+                  type: string
+                  description: Student ID to search for
+      responses:
+        '200':
+          description: Profile photo URL successfully found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  imageUrl:
+                    type: string
+                    description: URL of the profile photo
+        '400':
+          description: Missing student ID
+        '404':
+          description: Profile photo not found
+
+  /upload/find_code:
+    post:
+      summary: Find a QR code image by contact ID
+      tags:
+        - File Upload
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - con_id
+              properties:
+                con_id:
+                  type: string
+                  description: Contact ID to search for
+      responses:
+        '200':
+          description: QR code image URL successfully found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  imageUrl:
+                    type: string
+                    description: URL of the QR code image
+        '400':
+          description: Missing contact ID
+        '404':
+          description: QR code image not found
+
+  /upload/find_lost:
+    post:
+      summary: Find a lost item photo by lost item ID
+      tags:
+        - File Upload
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Lost_id
+              properties:
+                Lost_id:
+                  type: integer
+                  description: Lost item ID to search for
+      responses:
+        '200':
+          description: Lost item photo URL successfully found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  imageUrl:
+                    type: string
+                    description: URL of the lost item photo
+        '400':
+          description: Missing lost item ID
+        '404':
+          description: Lost item photo not found
+        '500':
+          description: Server error
+
+  /upload/profiles/{filename}:
+    get:
+      summary: Get a profile photo by filename
+      tags:
+        - File Upload
+      parameters:
+        - in: path
+          name: filename
+          required: true
+          schema:
+            type: string
+          description: Name of the profile photo file
+      responses:
+        '200':
+          description: Profile photo successfully retrieved
+          content:
+            image/*:
+              schema:
+                type: string
+                format: binary
+        '404':
+          description: Profile photo not found
+
+  /upload/code/{filename}:
+    get:
+      summary: Get a QR code image by filename
+      tags:
+        - File Upload
+      parameters:
+        - in: path
+          name: filename
+          required: true
+          schema:
+            type: string
+          description: Name of the QR code image file
+      responses:
+        '200':
+          description: QR code image successfully retrieved
+          content:
+            image/*:
+              schema:
+                type: string
+                format: binary
+        '404':
+          description: QR code image not found
+
+  /upload/lost/{filename}:
+    get:
+      summary: Get a lost item photo by filename
+      tags:
+        - File Upload
+      parameters:
+        - in: path
+          name: filename
+          required: true
+          schema:
+            type: string
+          description: Name of the lost item photo file
+      responses:
+        '200':
+          description: Lost item photo successfully retrieved
+          content:
+            image/*:
+              schema:
+                type: string
+                format: binary
+        '404':
+          description: Lost item photo not found
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+security:
+  - bearerAuth: [] 

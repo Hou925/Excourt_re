@@ -1,0 +1,65 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 100px 16px 16px;
+  background-color: #f4f4f4;
+}
+
+.title {
+  font-size: 22px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+  width: 100%;
+}
+
+.section {
+  margin-bottom: 20px;
+  width: 90%;
+}
+
+.section-title {
+  font-size: 18px;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.scroll-view {
+  max-height: 300px;
+  width: 100%;
+  background-color: #fff;
+  border-radius: 4px;
+  overflow: auto;
+}
+
+.court-item {
+  padding: 10px;
+  height: 60px;  /* 确保记录区域有足够高度 */
+  border-bottom: 1px solid #ddd;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s ease; /* 增加过渡效果 */
+}
+
+.court-item.selected {
+  background-color: #1aad19;  /* 选中的记录背景颜色 */
+  transform: scale(1.05); /* 稍微放大选中的记录 */
+}
+
+.court-text {
+  font-size: 16px;
+  color: #333;
+}
+
+.submit-button {
+  width: 90%;
+  padding: 12px;
+  background-color: #1aad19;
+  color: #ffffff;
+  font-size: 16px;
+  text-align: center;
+  border-radius: 4px;
+}

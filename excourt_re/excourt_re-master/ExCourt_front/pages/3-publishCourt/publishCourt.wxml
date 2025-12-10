@@ -1,0 +1,11 @@
+<view class="container">
+  <view class="picker-container">
+    <text>最多希望加入人数：</text>
+    <picker mode="selector" range="{{maxParticipantsArray}}" bindchange="bindMaxParticipantsChange">
+      <view class="picker">{{selectedMaxParticipants}}</view>
+    </picker>
+  </view>
+
+  <button bindtap="uploadQRCode">上传二维码</button>
+  <button bindtap="submitForm">确定</button>
+</view>
