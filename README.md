@@ -1,91 +1,68 @@
-# School Court Booking API
+# ExCourt Re — Refactored Campus Court Booking System
 
-A Flask-based REST API for managing school court bookings across multiple campuses.
+A refactored and enhanced version of **[ShanghaineseImpact/ExCourt](https://github.com/ShanghaineseImpact/ExCourt)**.  
+This project focuses on software architecture improvement, backend/frontend bug fixes, engineering standardization, and maintainability upgrades.
 
-## Overview
+## Acknowledgement
 
-This API provides functionality for managing court bookings in a school environment. It supports multiple campuses and allows students to book courts for specific dates and times.
+- Original project: **ShanghaineseImpact/ExCourt**
+- Original author: **@ShanghaineseImpact**
+- This repository is an independent **refactoring project** based on the original implementation.
 
-## Features
+## Project Overview
 
-- Student management (registration, authentication)
-- Court booking system
-- Multiple campus support (JiaDing, SiPing, Huxi, HuBei)
-- QR code generation for court bookings
-- PostgreSQL database integration
+ExCourt is a campus badminton court sharing and booking platform with:
+- WeChat Mini Program frontend
+- Flask REST API backend
+- Relational database storage
 
-## Database Schema
+Core features include:
+- user registration/login
+- court exchange / court gifting
+- team-up interactions
+- friend management
+- chat and image messaging
+- lost & found
 
-### Students Table
-- Student_id (Primary Key)
-- Student_name
-- Student_phone
-- Student_password
+---
 
-### Court Information Table
-- Court_id (Primary Key)
-- Court_campus (Enum: JiaDing, SiPing, Huxi, HuBei)
-- Court_date
-- Court_time
-- Court_no
-- Court_state (Enum: not_owned, owned)
-- Court_owner (Foreign Key to Student)
-- Court_qrcodeurl
+## Refactoring Goals
 
-## Prerequisites
+- Improve architecture clarity and extensibility
+- Fix critical business and interaction bugs
+- Standardize engineering practices
+- Enhance API correctness and consistency
+- Improve user experience and real-time behavior
 
-- Python 3.x
-- PostgreSQL
-- pip (Python package manager)
+---
 
-## Installation
+## Key Improvements
 
-1. Clone the repository:
-```bash
-  git clone [repository-url]
-  cd SchoolAPI
-```
+### Architecture
+- Migrated **MySQL → PostgreSQL**
+- Added Flask **`create_app()` + Blueprints**
+- Moved config to **`.env` + python-dotenv**
+- Introduced **connection pool + context manager**
+- Centralized system path/URL settings
 
-2. Create and activate a virtual environment:
-```bash
-  python -m venv venv
-  source venv/bin/activate  # On Windows: venv\Scripts\activate
-```
+### Design
+- Extracted **DAL/Repository** layer
+- Standardized **DictCursor** access
+- Removed legacy/unused routes
 
-3. Install dependencies:
-```bash
-  pip install -r requirements.txt
-```
+### Features & Bug Fixes
+- Rebuilt `/sendphoto` flow (save file → write DB)
+- Fixed avatar update + instant refresh
+- Implemented real-time chat (text/image)
+- Fixed date-switch refresh
+- Fixed max-participant update logic
+- Moved complex frontend ternary logic to backend
+- Fixed court exchange/gifting DB persistence
 
-4. Set up the database:
-```bash
-  psql -U your_username -d your_database -f SchoolAPI.sql
-```
-
-5. Configure environment variables:
-Create a `.env` file in the root directory with necessary configuration.
-
-## Running the Application
-
-```bash
-  python app.py
-```
-
-The API will be available at `http://localhost:5000`
-
-## Dependencies
-
-- Flask==3.0.2
-- psycopg2-binary==2.9.9
-- python-dotenv==1.0.1
-- Werkzeug==3.0.1
-- marshmallow==3.20.2
-- black==24.2.0
-- isort==5.13.2
-
-## Development
-
-The project uses:
-- Black for code formatting
-- isort for import sorting
-- PostgreSQL for database management
+### Engineering
+- Added `.gitignore` and `requirements.txt`
+- Centralized backend base URL config
+- Added **Marshmallow** request validation
+- Unified formatting with **Black + isort**
+- Unified API response language to English
+- Corrected API semantics (`402→409`, `POST→GET` for `/lost/getall`)
